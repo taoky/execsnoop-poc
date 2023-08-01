@@ -1,0 +1,2 @@
+[workspace]
+members = ["xtask", "execsnoop-poc", "execsnoop-poc-common"]
