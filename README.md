@@ -15,6 +15,15 @@ Reference:
 - https://github.com/willfindlay/suidsnoop
 - https://github.com/Iceber/aya-tools/tree/main/execsnoop
 
+## Portability
+
+Aya does not fully support CO-RE, thus you may need to regenerate `vmlinux.rs` for your kernel version.
+
+See:
+
+- https://aya-rs.dev/book/aya/aya-tool/
+- https://github.com/aya-rs/aya/issues/722
+
 ## Demo
 
 1. 32-bit support (it is implemented by some dirty hacks though...)
