@@ -8,7 +8,7 @@ use aya_log::BpfLogger;
 use bytes::BytesMut;
 use dashmap::DashMap;
 use execsnoop_poc_common::Event;
-use log::{debug, info, warn};
+use log::{debug, info};
 use tokio::signal;
 
 // A smaller Event struct used in Arc<DashMap<T>> in userspace program
@@ -57,10 +57,12 @@ async fn main() -> Result<(), anyhow::Error> {
     let mut bpf = Bpf::load(include_bytes_aligned!(
         "../../target/bpfel-unknown-none/release/execsnoop-poc"
     ))?;
-    if let Err(e) = BpfLogger::init(&mut bpf) {
-        // This can happen if you remove all log statements from your eBPF program.
-        warn!("failed to initialize eBPF logger: {}", e);
-    }
+    // Silence logger warning for this PoC
+    let _ = BpfLogger::init(&mut bpf);
+    // if let Err(e) = BpfLogger::init(&mut bpf) {
+    //     // This can happen if you remove all log statements from your eBPF program.
+    //     warn!("failed to initialize eBPF logger: {}", e);
+    // }
 
     let cpus = online_cpus()?;
     let num_cpus = cpus.len();
